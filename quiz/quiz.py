@@ -13,15 +13,23 @@ def index():
     return render_template('quiz/index.html')
 
 
-@bp.route('/quiz', methods=['POST'])
+@bp.route('/quiz', methods=['GET'])
 @login_required
 def take_quiz():
-    return render_template('quiz/create.html')
+    db = get_db()
+    questions = db.execute('SELECT * FROM question')
+    return render_template('quiz/take_quiz.html', questions=questions)
 
 
-@bp.route('/results', methods=('GET',))
+@bp.route('/results', methods=['GET', 'POST'])
 @login_required
 def get_results():
     db = get_db()
-    db.execute('DELETE FROM post WHERE id = ?', (id,))
-    return redirect(url_for('quiz.index'))
+    questions = db.execute('SELECT * FROM question')
+    if request.method == 'POST':
+        correct_answers = 0
+        for question in questions:
+            if question['correct_answer'] == request.form[questions['id']]:
+                correct_answers += 1
+    print(correct_answers)
+    return render_template('quiz/results.html')
