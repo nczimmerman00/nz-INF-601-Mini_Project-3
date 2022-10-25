@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <p class="d-flex justify-content-center m-3">{% block title %}Results{% endblock %}</p>
+  <h2 class="d-flex justify-content-center m-3">{% block title %}Results{% endblock %}</h2>
 {% endblock %}
 
 {% block content %}
     {% if score != -1 %}
-        <h3 class="d-flex justify-content-center m-3">You answered {{ score }} questions correctly!</h3>
+        <h5 class="d-flex justify-content-center m-3">You answered {{ score }} questions correctly!</h5>
     {% endif %}
     <h3 class="d-flex justify-content-center m-3">Top Attempts For the Day</h3>
     <table class="table table-striped">
