@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Welcome!{% endblock %}</h1>
+  <h2>{% block title %}Welcome!{% endblock %}</h2>
 {% endblock %}
 
 {% block content %}
@@ -29,7 +29,5 @@
         </div>
         </div>
     {% endif %}
-    <form action="https://google.com">
-        <input type="submit" value="View Results" />
-    </form>
+    <a class="btn btn-primary" href="{{ url_for('quiz.get_results') }}" role="button">View Results</a>
 {% endblock %}

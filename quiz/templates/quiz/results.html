@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}Results{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+    {% if score != -1 %}
+        <h3>You answered <strong>{{ score }}</strong> questions correctly!</h3>
+    {% endif %}
+    <h3>Top Attempts For the Day</h3>
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Score</th>
+            <th>Time</th>
+        </tr>
+    {% for attempt in top_attempts %}
+        <tr>
+            <td>{{ attempt['username'] }}</td>
+            <td>{{ attempt['score'] }}</td>
+            <td>{{ attempt['time_taken'] }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    <h3>Recent Attempts</h3>
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Score</th>
+            <th>Time</th>
+        </tr>
+    {% for attempt in recent_attempts %}
+        <tr>
+            <td>{{ attempt['username'] }}</td>
+            <td>{{ attempt['score'] }}</td>
+            <td>{{ attempt['time_taken'] }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

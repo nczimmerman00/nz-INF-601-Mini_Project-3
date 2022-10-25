@@ -22,14 +22,24 @@ def take_quiz():
 
 
 @bp.route('/results', methods=['GET', 'POST'])
-@login_required
 def get_results():
     db = get_db()
     questions = db.execute('SELECT * FROM question')
+    correct_answers = -1
     if request.method == 'POST':
         correct_answers = 0
         for question in questions:
-            if question['correct_answer'] == request.form[questions['id']]:
+            print(request.form[str(question['id'])])
+            if question['correct_answer'] == request.form[str(question['id'])]:
                 correct_answers += 1
-    print(correct_answers)
-    return render_template('quiz/results.html')
+        db.execute(
+            'INSERT INTO attempt (user_id, score)'
+            ' VALUES (?, ?)',
+            (g.user['id'], correct_answers)
+        )
+        db.commit()
+    recent_attempts = db.execute(
+        'SELECT username, score, time_taken FROM user INNER JOIN attempt on user.id = attempt.user_id ORDER BY attempt.time_taken DESC LIMIT 20')
+    top_attempts = db.execute(
+        'SELECT DISTINCT username, score, time_taken FROM user INNER JOIN attempt on user.id = attempt.user_id ORDER BY attempt.score DESC, attempt.time_taken LIMIT 5')
+    return render_template('quiz/results.html', score=correct_answers, recent_attempts=recent_attempts, top_attempts=top_attempts)

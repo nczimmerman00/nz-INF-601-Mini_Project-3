@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block content %}
-    <form method="post" action="{{ url_for('quiz.results') }}">
+    <form method="post" action="{{ url_for('quiz.get_results') }}">
     {% for question in questions %}
         <div>
             <h2>{{ question['q'] }}</h2>
-            <input type="radio", name="{{ question['id'] }}" value="a">
+            <input type="radio", name="{{ question['id'] }}", id="{{ question['id'] }}", value="a">
             <label for="{{ question['a'] }}">{{ question['a'] }}</label><br>
             <input type="radio", name="{{ question['id'] }}" value="b">
             <label for="{{ question['b'] }}">{{ question['b'] }}</label><br>
