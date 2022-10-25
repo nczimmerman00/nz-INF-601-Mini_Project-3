@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h2>{% block title %}Quiz{% endblock %}</h2>
+  <h2 class="d-flex justify-content-center m-3">{% block title %}Quiz{% endblock %}</h2>
 {% endblock %}
 
 {% block content %}
-    <form method="post" action="{{ url_for('quiz.get_results') }}">
+    <form method="post" action="{{ url_for('quiz.get_results') }}" class="justify-content-center m-3 w-75">
     {% for question in questions %}
-        <div>
-            <h2>{{ question['q'] }}</h2>
-            <input type="radio", name="{{ question['id'] }}", id="{{ question['id'] }}", value="a">
-            <label for="{{ question['a'] }}">{{ question['a'] }}</label><br>
-            <input type="radio", name="{{ question['id'] }}" value="b">
-            <label for="{{ question['b'] }}">{{ question['b'] }}</label><br>
-            <input type="radio", name="{{ question['id'] }}" value="c">
-            <label for="{{ question['c'] }}">{{ question['c'] }}</label><br>
-            <input type="radio", name="{{ question['id'] }}" value="d">
-            <label for="{{ question['d'] }}">{{ question['d'] }}</label><br>
+        <div class="form-check m-3">
+            <h4>{{ question['q'] }}</h4>
+            <input type="radio", name="{{ question['id'] }}", id="{{ question['id'] }}", value="a", class="form-check-input">
+            <label class="form-check-label", for="{{ question['a'] }}">{{ question['a'] }}</label><br>
+            <input type="radio", name="{{ question['id'] }}" value="b", class="form-check-input">
+            <label class="form-check-label", for="{{ question['b'] }}">{{ question['b'] }}</label><br>
+            <input type="radio", name="{{ question['id'] }}" value="c", class="form-check-input">
+            <label class="form-check-label", for="{{ question['c'] }}">{{ question['c'] }}</label><br>
+            <input type="radio", name="{{ question['id'] }}" value="d", class="form-check-input">
+            <label class="form-check-label", for="{{ question['d'] }}">{{ question['d'] }}</label><br>
         </div>
     {% endfor %}
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" class="btn btn-primary justify-content-center">
     </form>
 {% endblock %}

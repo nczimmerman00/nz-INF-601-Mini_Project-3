@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h2>{% block title %}Welcome!{% endblock %}</h2>
+  <h2 class="d-flex justify-content-center m-3">{% block title %}Welcome!{% endblock %}</h2>
 {% endblock %}
 
 {% block content %}
-    <p>How well do you know Nick? Take this quiz to find out, and compare your results to everyone else!</p>
+    <p class="d-flex justify-content-center">How well do you know Nick? Take this quiz to find out, and compare your results to everyone else!</p>
+    <div class="d-flex justify-content-center col-xs-3">
     {% if g.user %}
-        <a href="{{ url_for('quiz.take_quiz') }}", class='btn btn-primary'>Take the Quiz</a>
+        <a href="{{ url_for('quiz.take_quiz') }}", class='btn btn-primary me-2'>Take the Quiz</a>
     {% else %}
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Take the Quiz
         </button>
 
@@ -29,5 +30,6 @@
         </div>
         </div>
     {% endif %}
-    <a class="btn btn-primary" href="{{ url_for('quiz.get_results') }}" role="button">View Results</a>
+    <a class="btn btn-primary me-2" href="{{ url_for('quiz.get_results') }}" role="button">View Results</a>
+    </div>
 {% endblock %}

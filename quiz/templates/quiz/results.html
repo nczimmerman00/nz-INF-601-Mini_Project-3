@@ -1,35 +1,41 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h2>{% block title %}Results{% endblock %}</h2>
+  <p class="d-flex justify-content-center m-3">{% block title %}Results{% endblock %}</p>
 {% endblock %}
 
 {% block content %}
     {% if score != -1 %}
-        <h3>You answered <strong>{{ score }}</strong> questions correctly!</h3>
+        <h3 class="d-flex justify-content-center m-3">You answered {{ score }} questions correctly!</h3>
     {% endif %}
-    <h3>Top Attempts For the Day</h3>
-    <table>
+    <h3 class="d-flex justify-content-center m-3">Top Attempts For the Day</h3>
+    <table class="table table-striped">
+        <thead>
         <tr>
-            <th>User</th>
-            <th>Score</th>
-            <th>Time</th>
+            <th scope="col">User</th>
+            <th scope="col">Correct Answers</th>
+            <th scope="col">Time</th>
         </tr>
+        </thead>
+        <tbody>
     {% for attempt in top_attempts %}
         <tr>
             <td>{{ attempt['username'] }}</td>
             <td>{{ attempt['score'] }}</td>
             <td>{{ attempt['time_taken'] }}</td>
         </tr>
+        </tbody>
     {% endfor %}
     </table>
-    <h3>Recent Attempts</h3>
-    <table>
+    <h3 class="d-flex justify-content-center m-3">Recent Attempts</h3>
+    <table class="table table-striped">
+        <thead>
         <tr>
-            <th>User</th>
-            <th>Score</th>
-            <th>Time</th>
+            <th scope="col">User</th>
+            <th scope="col">Correct Answers</th>
+            <th scope="col">Time</th>
         </tr>
+        </thead>
     {% for attempt in recent_attempts %}
         <tr>
             <td>{{ attempt['username'] }}</td>
